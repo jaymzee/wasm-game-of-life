@@ -131,7 +131,7 @@ impl fmt::Display for Universe {
                 write!(f, "\n")?;
             }
             for &cell in line {
-                let symbol = if cell == Cell::Dead { ' ' } else { 'X' };
+                let symbol = if cell == Cell::Dead { "  " } else { "[]" };
                 write!(f, "{}", symbol)?;
             }
         }
