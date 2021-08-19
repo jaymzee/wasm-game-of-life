@@ -125,12 +125,15 @@ use std::fmt;
 
 impl fmt::Display for Universe {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        for line in self.cells.as_slice().chunks(self.width as usize) {
+        for (n, line) in self.cells.as_slice()
+            .chunks(self.width as usize).enumerate() {
+            if n > 0 {
+                write!(f, "\n")?;
+            }
             for &cell in line {
-                let symbol = if cell == Cell::Dead { '\u{25fb}' } else { '\u{25fc}' };
+                let symbol = if cell == Cell::Dead { ' ' } else { 'X' };
                 write!(f, "{}", symbol)?;
             }
-            write!(f, "\n")?;
         }
 
         Ok(())
